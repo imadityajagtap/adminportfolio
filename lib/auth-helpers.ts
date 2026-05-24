@@ -1,10 +1,6 @@
-import { getServerSession } from 'next-auth';
-import { NextResponse } from 'next/server';
-import { authOptions } from '@/lib/auth';
-
 /**
  * Helper function to check authentication in API routes
- * Returns NextResponse with 401 if not authenticated, null if authenticated
+ * Authentication is disabled - always returns null (allows all requests)
  *
  * Usage:
  * ```typescript
@@ -13,31 +9,21 @@ import { authOptions } from '@/lib/auth';
  * ```
  */
 export async function requireAuth() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Unauthorized - Authentication required',
-      },
-      { status: 401 }
-    );
-  }
-
+  // Authentication disabled - allow all requests
   return null;
 }
 
 /**
  * Helper function to get the current session
- * Returns the session or throws an error if not authenticated
+ * Authentication is disabled - returns mock session
  */
 export async function getAuthSession() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    throw new Error('Unauthorized');
-  }
-
-  return session;
+  // Return mock session for compatibility
+  return {
+    user: {
+      id: 'admin',
+      email: 'admin@portfolio.com',
+      role: 'admin',
+    },
+  };
 }
