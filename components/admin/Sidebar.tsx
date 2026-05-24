@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut, useSession } from 'next-auth/react';
 import {
   LayoutDashboard,
   Briefcase,
@@ -16,7 +15,6 @@ import {
   Settings,
   Mail,
   FileDown,
-  LogOut,
   ExternalLink,
 } from 'lucide-react';
 
@@ -67,7 +65,6 @@ const navGroups: NavGroup[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
@@ -88,13 +85,9 @@ export default function Sidebar() {
     fetchUnreadCount();
   }, []);
 
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: '/admin/login' });
-  };
-
-  const userName = session?.user?.name || 'Admin';
-  const userEmail = session?.user?.email || '';
-  const userInitial = userName?.charAt(0)?.toUpperCase() || 'A';
+  const userName = 'Admin';
+  const userEmail = 'admin@portfolio.com';
+  const userInitial = 'A';
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 bg-foreground/[0.02] border-r border-foreground/10 flex flex-col z-40">
@@ -166,7 +159,7 @@ export default function Sidebar() {
 
         {/* View site link */}
         <a
-          href="/"
+          href="https://mainportfolio-aditya-projects312.vercel.app"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm text-foreground/70 hover:text-primary hover:bg-foreground/5 rounded-lg transition-colors"
@@ -174,15 +167,6 @@ export default function Sidebar() {
           View site
           <ExternalLink size={14} />
         </a>
-
-        {/* Logout button */}
-        <button
-          onClick={handleLogout}
-          className="w-full mt-2 px-4 py-2 text-sm text-foreground/70 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors flex items-center gap-2 justify-center"
-        >
-          <LogOut size={16} />
-          Logout
-        </button>
       </div>
     </aside>
   );
