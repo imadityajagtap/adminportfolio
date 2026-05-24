@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation';
 import { Lock, Eye, EyeOff, Mail } from 'lucide-react';
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('aditya.jagtap312@gmail.com');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@admin.com');
+  const [password, setPassword] = useState('admin123');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
