@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import AdminLayoutClient from '@/components/admin/AdminLayoutClient';
 
+export const dynamic = 'force-dynamic';
+
 interface AdminLayoutProps {
   children: ReactNode;
 }
